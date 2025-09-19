@@ -1,0 +1,347 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://src/UI/GUI.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/InventorySlot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/heart.png" type="Texture" id=3]
+[ext_resource path="res://assets/Tiny5-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/big_coin.png" type="Texture" id=5]
+[ext_resource path="res://src/UI/UIButton.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=21]
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.345098, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.117647, 0.478431, 0.0784314, 1 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=17]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=22]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.568627, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.454902, 0.00784314, 0.00784314, 1 )
+
+[sub_resource type="Theme" id=14]
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.0156863, 0.447059, 0.12549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="DynamicFont" id=10]
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=16]
+resource_name = "whiten"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=18]
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=19]
+resource_name = "game_over"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOver:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="GUI" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+Slot = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1020.0
+margin_bottom = 597.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+modulate = Color( 0.0705882, 0, 0.290196, 1 )
+margin_left = 218.0
+margin_top = 88.0
+margin_right = 806.0
+margin_bottom = 106.0
+custom_fonts/font = SubResource( 21 )
+text = "Congratulations on completing the demo of Pit Of Calamity! More content coming soon!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background_health" type="ProgressBar" parent="."]
+margin_left = 73.0
+margin_top = 2.0
+margin_right = 173.0
+margin_bottom = 17.0
+custom_styles/fg = SubResource( 1 )
+step = 1.0
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="current_health" type="ProgressBar" parent="background_health"]
+margin_right = 100.0
+margin_bottom = 15.0
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 20 )
+step = 1.0
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 32, 10 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Inventory" type="HBoxContainer" parent="."]
+margin_left = 30.0
+margin_top = 540.0
+margin_right = 568.0
+margin_bottom = 559.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot" parent="Inventory" instance=ExtResource( 2 )]
+margin_bottom = 19.0
+
+[node name="InventorySlot2" parent="Inventory" instance=ExtResource( 2 )]
+margin_left = 50.0
+margin_right = 50.0
+margin_bottom = 19.0
+
+[node name="InventorySlot3" parent="Inventory" instance=ExtResource( 2 )]
+margin_left = 100.0
+margin_right = 100.0
+margin_bottom = 19.0
+
+[node name="Pause" type="Panel" parent="."]
+visible = false
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 974.0
+margin_bottom = 550.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pause"]
+margin_left = 407.0
+margin_top = 66.0
+margin_right = 471.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 17 )
+text = "PAUSED"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" parent="Pause" instance=ExtResource( 6 )]
+position = Vector2( 437, 250 )
+text = "RETURN"
+
+[node name="Title" parent="Pause" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 438, 272 )
+text = "TITLE"
+
+[node name="Quit" parent="Pause" instance=ExtResource( 6 )]
+position = Vector2( 438, 327 )
+text = "QUIT"
+
+[node name="Label2" type="Label" parent="Pause"]
+margin_left = 342.0
+margin_top = 98.0
+margin_right = 536.0
+margin_bottom = 221.0
+custom_fonts/font = SubResource( 22 )
+text = "Controls:
+A / LeftArrow = Move Left
+D / RightArrow = Move RIght
+W / Space / UpArrow = Jump
+Q / E = Navigate Inventory
+R = Reload"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 45.0
+margin_top = 1.0
+margin_right = 75.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 5 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoContainer" type="HBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 480.0
+margin_right = 60.0
+margin_bottom = 520.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 938.5, 13.5 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="GoldLabel" type="Label" parent="."]
+margin_left = 955.0
+margin_top = 4.0
+margin_right = 1001.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 6 )
+text = "Gold: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boss_background_health" type="ProgressBar" parent="."]
+margin_left = 499.0
+margin_top = 538.0
+margin_right = 999.0
+margin_bottom = 552.0
+grow_horizontal = 0
+mouse_filter = 2
+custom_styles/fg = SubResource( 13 )
+custom_styles/bg = SubResource( 11 )
+max_value = 500.0
+value = 500.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boss_current_health" type="ProgressBar" parent="boss_background_health"]
+margin_right = 500.0
+margin_bottom = 15.0
+mouse_filter = 2
+theme = SubResource( 14 )
+custom_styles/fg = SubResource( 12 )
+custom_styles/bg = SubResource( 15 )
+max_value = 500.0
+value = 250.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="boss_background_health"]
+margin_left = -40.0
+margin_bottom = 18.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 10 )
+text = "Boss"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/whiten = SubResource( 16 )
+
+[node name="GameOver" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+margin_right = 1021.0
+margin_bottom = 600.0
+mouse_filter = 2
+color = Color( 0.47451, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="GameOver"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameOver/Control"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 57.6
+margin_top = 5.0
+margin_right = 141.6
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 18 )
+text = "GAME OVER"
+
+[node name="Quit" parent="GameOver" instance=ExtResource( 6 )]
+position = Vector2( 494, 445 )
+collision_layer = 2
+collision_mask = 2
+text = "QUIT"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/game_over = SubResource( 19 )

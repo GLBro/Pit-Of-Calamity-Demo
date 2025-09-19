@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/cannon.png" type="Texture" id=1]
+[ext_resource path="res://src/characters/Cannon.gd" type="Script" id=2]
+[ext_resource path="res://src/guns/Cannonball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/Damage_Flicker.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 51.5, 26.5 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 256, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 384, 0, 128, 64 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "walking",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 24, 29.5 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 14, 18 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 14, 18 )
+
+[node name="Cannon" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 2 )
+Ball = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 1.5 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 6 )
+animation = "walking"
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -38, -1 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 38, -1 )
+shape = SubResource( 9 )
+
+[node name="Left_Cannon" type="Position2D" parent="."]
+position = Vector2( -49, -1 )
+
+[node name="Right_Cannon" type="Position2D" parent="."]
+position = Vector2( 49, 0 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Damage_Flicker" parent="." instance=ExtResource( 4 )]
+modulate = Color( 0.133333, 0.00784314, 0.00784314, 0.262745 )
+margin_left = -23.0
+margin_top = -28.0
+margin_right = 23.0
+margin_bottom = 20.0
+total_time = 0.5
+flicker_time = 0.1
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
